@@ -27,7 +27,7 @@ namespace mrCorner
 
         public void ReadInput()
         {
-            string[] lines = File.ReadAllLines("input.txt");
+            string[] lines = File.ReadAllLines("input.txt").Skip(1).ToArray();
 
             for (int i = 0; i < 10; i++)
             {

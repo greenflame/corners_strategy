@@ -8,6 +8,8 @@ namespace mrCorner
         private Map Map { get; set; } = new Map();
 
         private const int MaxDepth = 3;
+        private const int Difficulty = 100;
+        private const int MaxDifficulty = 100;
 
         public Strategy()
         {
@@ -16,10 +18,16 @@ namespace mrCorner
         public void Run()
         {
             Map.ReadInput();
+            Random rand = new Random();
 
             Action bestAct;
             EstimateActionDeep(out bestAct);
-            bestAct.WriteAsOutput();
+
+            List<Action> allActs = Map.PossibleActionsSide(1);
+            Action randAct = allActs[rand.Next(allActs.Count)];
+
+            Action resAct = rand.Next(MaxDifficulty) < Difficulty ? bestAct : randAct;
+            resAct.WriteAsOutput();
         }
 
         private int EstimateActionDeep(out Action action, int depth = 0)
